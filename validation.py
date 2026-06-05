@@ -21,33 +21,31 @@ def valid_phone(number):
     Parameter 1 -> number: Phone number to be validated"""
     number = str(number)
     starters = "0123456789+"
-    starts_with = False
-    length_ok = False
-    space_hyphen = " -" 
-    is_number = False
+    space_hyphen = " -"
     
-    if number[0] in starters and "+" not in number[1:]:
-        starts_with = True
+    if len(number) < 5:
+        return False
+    if number[0] not in starters or "+" in number[1:]:
+        return False
+    if number[1] in space_hyphen or number[1] == "+":
+        return False
     cleaned = ""
     for n in number:
         if n in space_hyphen:
             continue
         cleaned += n
-    if 5 <= len(cleaned) <= 15:
-        length_ok = True
-    if valid_number(cleaned[1:]):
-        is_number = True
-    
-    if starts_with and length_ok and is_number:
-        return True
-    return False
+    if 5 > len(cleaned) or len(cleaned) > 15:
+        return False
+    if not valid_number(cleaned[1:]):
+        return False
+    return True
 
 def valid_mail(email):
     """Validates a provided email address.
     Parameter 1 -> email: Email address to be validated"""
     email = str(email)
     index = len(email) - 1
-    symbols = "!\"#$%&'()*+,/:;<=>?@[\\]^`{|}~"
+    symbols = "!\"#$%&'()*,/:;<=>?@[\\]^`{|}~"
     if ".." in email:
         return False
         
@@ -115,5 +113,5 @@ if __name__ == "__main__":
     print(f"(2)\t6y: {valid_number('6y')}")
     print(f"(3)\ttred: {valid_number('trred')}")
     print(f"(4)\t+234+4536+789: {valid_phone('+234+4356+789')}")
-    print(f"(5)\t+2348108687545: {valid_phone('+2348108687545')}")
+    print(f"(5)\t+-2348108687545: {valid_phone('+-2348108687545')}")
     print(f"(6)\tqwerty@gmail.co.uk.ng: {valid_mail('qwerty@gmail.co.uk.ng')}")
