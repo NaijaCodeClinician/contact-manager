@@ -1,11 +1,10 @@
 # 📇 Contact Manager – A Python CLI App
 
+# 👨‍⚕️ About the Author
 > *“Medical student who codes. Building health tech, one line at a time.”*
-
-## 👨‍⚕️ About the Author
-
+> 
 I’m **NaijaCodeClinician** – a Nigerian, a future physician, and a self‑taught Python programmer.  
-I’m currently working through **OpenStax Introduction to Python Programming** (Chapter 7 – Modules). This is one of my first complete projects.  
+I’m currently working through **OpenStax Introduction to Python Programming** (Chapter 8 – Strings). This is one of my first complete projects.  
 I believe the best doctors will also understand technology. Every line of code brings me closer to building tools that improve healthcare in Nigeria.
 
 ## 🧩 Project Description
@@ -65,7 +64,10 @@ Next improvements (when I learn more):
 I’m still learning, so any suggestions, code reviews, or ideas are highly appreciated.
 Feel free to open an issue or contact me via GitHub.
 
----
 
-Author: NaijaCodeClinician
+
+Author: `NaijaCodeClinician`
+
+
 License: MIT
+
