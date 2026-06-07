@@ -1,6 +1,24 @@
 import time
 from validation import valid_phone, valid_mail
 
+def max_width(name, phone, email):
+    name_width = 0
+    phone_width = 0
+    email_width = 0
+    for details in range(len(name)):
+        len_contact_name = len(name[details])
+        if len_contact_name > name_width:
+            name_width = len_contact_name + 2
+        len_phone_num = len(phone[details])
+        if len_phone_num > phone_width:
+            phone_width = len_phone_num + 2
+        len_email_address = len(email[details])
+        if len_email_address > email_width:
+            email_width = len_email_address + 2
+    total_width = name_width + phone_width + email_width
+        
+    return name_width, phone_width, email_width, total_width
+        
 def add_contact(name, phone, email):
     """This function takes the user's input (Contact name, Phone number and Email address), and appends it to parallel lists (name, phone, email)"""
     while True:
@@ -29,7 +47,7 @@ def add_contact(name, phone, email):
     while True:
         choice = input("Would you like to input the email address of the saved contact (y/n)? ").strip().lower()
         if choice == "n":
-            email.append("No Email Address")
+            email.append("N/A")
             break
         elif choice == "y":
             while True:
@@ -55,9 +73,14 @@ def view_contacts(name, phone, email):
     if not name:
         print("No contact has been saved")
     else:
+        name_width, phone_width, email_width, total_width = max_width(name, phone, email)
+        print(f"{'YOUR CONTACTS':^{total_width}}")
+        print("_" * total_width)
+        print(f"{'NAME':<{name_width}}{'PHONE NUMBER':^{phone_width}}{'EMAIL ADDRESS':>{email_width}}")
+        print("_" * total_width)
         for i in range(len(name)):
-            print(f"======== CONTACT {i+1} =========\n\tName: {name[i].title()}\n\tPhone Number: {phone[i]}\n\tEmail Address: {email[i]}")
-            print()
+            print(f"{name[i].title():<{name_width}}{phone[i]:^{phone_width}}{email[i]:>{email_width}}")
+            print("_" * total_width)
 
 def search_contact(name, phone, email):
     """Searches for a contact, using the contact's name or search item"""
@@ -205,8 +228,8 @@ def delete_contact(name, phone, email):
   else:
     while True:
       print("========== YOUR CONTACTS ==========")
-      for i, nam in enumerate(name):
-        print(f"{name[i].title()}")
+      for nam in name:
+        print(f"{nam.title()}")
         print()
       print()
       print("To quit this process input 'done'")
