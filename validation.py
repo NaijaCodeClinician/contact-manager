@@ -16,6 +16,27 @@ def valid_number(number):
             return False
     return True
 
+def valid_decimal_number(number):
+    """Validates both a whole number and a decimal (optional leading '+').
+    Number can either be negative or positive
+    Parameter -> number: Input to be validated"""
+    number = str(number).strip()
+    dot_count = 0
+    if not number:
+        return False
+    if number[0] == "." or number[-1] == ".":
+        return False
+    if number[0] == "+" or number[0] == "-":
+        number = number[1:]
+    for ch in number:
+            if ch == ".":
+                dot_count += 1
+                if dot_count > 1:
+                    return False
+            elif '0' > ch or ch > '9':
+                return False
+    return True
+        
 def valid_phone(number):
     """Runs a validation on the validity of a phone number
     Parameter 1 -> number: Phone number to be validated"""
@@ -109,9 +130,10 @@ def valid_mail(email):
     
 if __name__ == "__main__":
     print("Check if the following inputs are valid:")
-    print(f"(1)\t56: {valid_number(56)}")
-    print(f"(2)\t6y: {valid_number('6y')}")
-    print(f"(3)\ttred: {valid_number('trred')}")
-    print(f"(4)\t+234+4536+789: {valid_phone('+234+4356+789')}")
-    print(f"(5)\t+-2348108687545: {valid_phone('+-2348108687545')}")
-    print(f"(6)\tqwerty@gmail.co.uk.ng: {valid_mail('qwerty@gmail.co.uk.ng')}")
+    print(f"(1)\t56: {valid_number("56")}")
+    print(f"(2)\t5.6: {valid_decimal_number("5.6")}")
+    print(f"(3)\t6y: {valid_number('6y')}")
+    print(f"(4)\ttred: {valid_number('trred')}")
+    print(f"(5)\t+234+4536+789: {valid_phone('+234+4356+789')}")
+    print(f"(6)\t+-2348108687545: {valid_phone('+-2348108687545')}")
+    print(f"(7)\tqwerty@gmail.co.uk.ng: {valid_mail('qwerty@gmail.co.uk.ng')}")
