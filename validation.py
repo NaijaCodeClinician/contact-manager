@@ -7,12 +7,12 @@ def valid_number(number):
     number = str(number).strip()
     if not number:
         return False
-    if number[0] == "+" or number[0] == "-":
+    if number.startswith("+") or number.startswith("-"):
         number = number[1:]
     if not number:
         return False
     for ch in number:
-        if ch < "0" or ch > "9":
+        if not ch.isdigit():
             return False
     return True
 
@@ -24,16 +24,22 @@ def valid_decimal_number(number):
     dot_count = 0
     if not number:
         return False
-    if number[0] == "." or number[-1] == ".":
+    if number.startswith(".") or number.endswith("."):
         return False
-    if number[0] == "+" or number[0] == "-":
+    if number.startswith("+") or number.startswith("-"):
         number = number[1:]
+        if not number:
+            return False
+        if number.startswith(".") or number.endswith("."):
+            return False
+    if "." in number:
+        dot_count = number.count(".")
+    if dot_count > 1:
+        return False
     for ch in number:
             if ch == ".":
-                dot_count += 1
-                if dot_count > 1:
-                    return False
-            elif '0' > ch or ch > '9':
+                continue
+            if not ch.isdigit():
                 return False
     return True
         
@@ -75,52 +81,36 @@ def valid_mail(email):
     
     if " " in email:
         return False
-    
-    if email[-1] == "." or email[0] == ".":
+    if email.startswith("@") or email.endswith("@"):
+        return False
+    if email.startswith(".") or email.endswith("."):
         return False
     
-    at_count = 0
-    at_pos = -1
-    
-    for i in range(len(email)):
-        if email[i] == "@" and i != 0 and i != index:
-            at_count += 1
-            at_pos = i
- 
-    if at_pos == -1:
+    at_count = email.count("@")
+    if at_count != 1:
         return False
-    
-    local = email[:at_pos]
-    domain = email[at_pos + 1:]
+        
+    split_email = email.split("@")
+    local = split_email[0]
+    domain = split_email[-1]
     
     for ch in local:
         if ch in symbols:
             return False
 
-    idx = -1
-    for i in range(len(domain) - 1, -1, -1):
-        if domain[i] == '.':
-            if i == 0 or i == len(domain) - 1:
-                return False
-            idx = i
-            break
-    if idx == -1:
+    if "." not in domain:
         return False
+    split_domain = domain.split(".")
+    tld = split_domain[-1]  
     
-    tld = domain[idx + 1:]
-    
-        
     if len(tld) < 2:
         return False
     
     is_letter = True
     for ch in tld:
-        if not ('a' <= ch <= 'z' or 'A' <= ch <= 'Z'):
+        if not ch.isalpha():
             is_letter = False
             break
-    
-    if at_count != 1:
-        return False
     
     
     if not is_letter:
@@ -130,8 +120,8 @@ def valid_mail(email):
     
 if __name__ == "__main__":
     print("Check if the following inputs are valid:")
-    print(f"(1)\t56: {valid_number("56")}")
-    print(f"(2)\t5.6: {valid_decimal_number("5.6")}")
+    print(f"(1)\t56: {valid_number('56')}")
+    print(f"(2)\t5.6: {valid_decimal_number('5.6')}")
     print(f"(3)\t6y: {valid_number('6y')}")
     print(f"(4)\ttred: {valid_number('trred')}")
     print(f"(5)\t+234+4536+789: {valid_phone('+234+4356+789')}")
