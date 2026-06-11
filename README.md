@@ -4,7 +4,7 @@
 > *“Medical student who codes. Building health tech, one line at a time.”*
 > 
 I’m **NaijaCodeClinician** – a Nigerian, a future physician, and a self‑taught Python programmer.  
-I’m currently working through **OpenStax Introduction to Python Programming** (Chapter 8 – Strings). This is one of my first complete projects.  
+I’m currently working through **OpenStax Introduction to Python Programming**. This is one of my first complete projects.  
 I believe the best doctors will also understand technology. Every line of code brings me closer to building tools that improve healthcare in Nigeria.
 
 ## 🧩 Project Description
